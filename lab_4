@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cmath>
+#include <locale>
+
+using namespace std;
+
+int main()
+{
+	setlocale(LC_ALL, "rus");
+
+	const int N = 150;
+	int a[N]; int aNum[N];  int fin[N];
+
+	cout << "Введите количество элементов исходного массива : \n"; int n; cin >> n;
+	cout << "Перечислите значения этих элементов : \n";
+
+	for (int i = 0; i < n; i++)  // вводилка
+		cin >> a[i];
+
+	cout << "Исходный массив имеет вид :\n";
+	for (int i = 0; i < n; i++)
+		cout << a[i] << "\t";
+
+	cout << "\n";
+
+	for (int i = 0; i <= n; i++)
+	{
+		aNum[i] = 0;
+		for (int b = 0; b <= n; b++)
+			if (a[i] == a[b])
+				aNum[i] ++;
+	};
+
+	for (int i = 0; i < n; i++)
+		for (int b = i + 1; b <= n; b++)
+			if (aNum[i] > aNum[b])
+			{
+				int swap_;
+				swap_ = a[i];
+				a[i] = a[b];
+				a[b] = swap_;
+
+				swap_ = aNum[i];
+				aNum[i] = aNum[b];
+				aNum[b] = swap_;
+			};
+
+	for (int i = 0; i < n; i++)
+		for (int b = i + 1; b <= n; b++)
+			if ((aNum[i] == aNum[b]) && (a[i] > a[b]))
+			{
+				int swap_;
+				swap_ = a[i];
+				a[i] = a[b];
+				a[b] = swap_;
+
+				swap_ = aNum[i];
+				aNum[i] = aNum[b];
+				aNum[b] = swap_;
+			};
+
+	int b = 0;
+	for (int i = 0; i < n; i++)
+	{
+		fin[b] = a[i];
+		b++;
+	};
+
+	cout << "Получившийся массив элементов имеет вид : \n";
+
+	for (int i = 0; i < b; i++)
+		cout << fin[i] << "\t";
+}
